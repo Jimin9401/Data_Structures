@@ -1,8 +1,7 @@
-# Data_Structures
+# Data_Structures with C..
 
 
-## 구현할 자료구조 목록
-
+## Contents
 
 -Recursion
 
