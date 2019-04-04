@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{f8911760-6225-4fe6-abda-23f9f86624da}</ProjectGuid>
+    <ProjectGuid>{efa201f4-835a-4dae-b0ff-223b56b3eda8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Stack1</RootNamespace>
+    <RootNamespace>LinkedStack</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,7 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Stack1.c" />
+    <ClCompile Include="LinkedStack.cpp">
+      <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ConformanceMode>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
