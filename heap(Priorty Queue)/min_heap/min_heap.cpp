@@ -1,5 +1,3 @@
-// Data_structure.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -12,31 +10,31 @@
 typedef int element;
 
 typedef struct heap {
-	element data[max_size];
+	element data[max_size] = { INT_MAX };
 	element key;
 }heap;
 
 heap *create() {
 	heap *tmp;
 	tmp = (heap*)malloc(sizeof(heap));
-	tmp->key = 1;
+	tmp->key = 0;
 
 	return tmp;
 }
 
-void push(heap *arr,element value) {
+void push(heap *arr, element value) {
+	arr->key++;
 	element i = arr->key;
 	arr->data[arr->key] = value;
 	element tmp;
 
-	while ((i/2 != 0) && (arr->data[i] > arr->data[i / 2])) 
+	while ((i/2 != 0) && (arr->data[i] < arr->data[i / 2]))
 	{
 		tmp = arr->data[i];
 		arr->data[i] = arr->data[i / 2];
 		arr->data[i / 2] = tmp;
 		i /= 2;
 	}
-	arr->key++;
 }
 
 element pop(heap *arr) {
@@ -45,40 +43,42 @@ element pop(heap *arr) {
 	arr->data[1] = arr->data[arr->key];
 	arr->key--;
 
-	element i= 1;
+	element i = 1;
 	element tmp;
 
-	while (i<arr->key && ((arr->data[i]<arr->data[i*2]) || (arr->data[i] < arr->data[i * 2+1]))) {
-		if (arr->data[i * 2] > arr->data[i * 2 + 1]) {
+	while ((arr->data[i] > arr->data[i * 2]) || (arr->data[i] > arr->data[i * 2 + 1])) {
+		if (i * 2 <= arr->key && arr->data[i * 2] < arr->data[i * 2 + 1]) {
 			tmp = arr->data[i];
 			arr->data[i] = arr->data[i * 2];
 			arr->data[i * 2] = tmp;
 			i *= 2;
 		}
-		else {
+		else if (i * 2 + 1 <= arr->key && arr->data[i * 2] >= arr->data[i * 2 + 1]) {
 			tmp = arr->data[i];
-			arr->data[i] = arr->data[i * 2+1];
-			arr->data[i * 2+1] = tmp;
+			arr->data[i] = arr->data[i * 2 + 1];
+			arr->data[i * 2 + 1] = tmp;
 			i = i * 2 + 1;
-		}		
+		}
+		else {
+			break;
+		}
 	}
 	return pop_value;
 }
 
-void print(heap *arr) 
+void print(heap *arr)
 {
-	for (int i = 1; i <arr->key; i++) 
+	for (int i = 1; i <= arr->key; i++)
 	{
-		printf("%d ",arr->data[i]);
+		printf("%d ", arr->data[i]);
 	}
 	printf("\n");
 }
 
 void sort(heap *arr) {
-	heap *a;
-	a = arr;
+	heap *a = arr;
 	element k = a->key;
-	for (int i = 0; i < k-1; i++) {
+	for (int i = 0; i < k; i++) {
 		printf("%d ", pop(a));
 	}
 	printf("\n");
@@ -88,28 +88,27 @@ int main()
 {
 	char command[20];
 
-	heap *a;
-	a = create();
+	heap *heapnode;
+	heapnode = create();
 	element value;
 	while (1) {
 		scanf("%s", command);
-		if (strcmp(command, "push")==0) {
-			
+		if (strcmp(command, "push") == 0) {
+
 			scanf("%d", &value);
-			push(a, value);
+			push(heapnode, value);
 		}
 		else if (strcmp(command, "print") == 0) {
-			print(a);
+			print(heapnode);
 
 		}
-		
+
 		else if (strcmp(command, "pop") == 0) {
 
-			printf("%d\n",pop(a));
+			printf("%d\n", pop(heapnode));
 		}
 		else if (strcmp(command, "sort") == 0) {
-
-			sort(a);
+			sort(heapnode);
 		}
 	}
 	return 0;

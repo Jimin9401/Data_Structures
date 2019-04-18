@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Data_structure.c">
+    <ClCompile Include="max_heap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
