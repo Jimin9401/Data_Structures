@@ -16,54 +16,37 @@ void swap(int *x, int *y) {
 }
 
 int partition(int *arr, int left, int right) {
+	
+	int pivot = arr[left];
+	int low = left;
+	int high = right + 1;
 
-	int pivot =arr[left];
-
-	int low = left+1;
-
-	int high = right;
-
-
-	while (low < high) {
-
-
-		while (arr[low] < pivot && low<=right) {
+	do {
+		do {
 			low++;
-		}
-		while(arr[high]>pivot && low >=left){
+
+		} while (arr[low] < pivot && low <= right);
+		do {
 			high--;
-		}
-
+		} while (arr[high] > pivot && high >= left);
 		if (low < high) {
-			swap(&arr[low], &arr[high]);
+			swap(&arr[high], &arr[low]);
 		}
+	} while (low < high);
 
-	}
-	for (int i = left; i <= right; i++) {
-		printf("%d ", arr[i]);
-	}
-
-	if (low != high) {
-		swap(&arr[left], &arr[high]);
-	}
-
-	printf("\n");
-
-	for (int i = left; i <= right; i++) {
-		printf("%d ", arr[i]);
-	}
-	printf("\n");
+	swap(&arr[left], &arr[high]);
 
 	return high;
 }
 
 
 void quickSort(int *arr, int left, int right) {
+	
 	if (left < right) {
-		int q = partition(arr, left, right);
-		quickSort(arr, left, q-1);
-		quickSort(arr, q+1, right);
-		printf("\n");
+		int p = partition(arr, left, right);
+
+		quickSort(arr, left, p-1);
+		quickSort(arr, p+1, right);
 	}
 }
 
